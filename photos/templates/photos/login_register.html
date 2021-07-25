@@ -1,0 +1,46 @@
+{% extends 'photos/base.html' %}
+{% load static %}
+{% block main-content %} 
+    <div class="container mt-5">
+    <div class="row my-3">
+    <div class="col-sm-6 offset-sm-3">
+        <div class="login--wrapper">
+            {% if page == 'login' %}
+            <form method='POST' class="form">
+             {% csrf_token %}
+                <h1>Login</h1>
+                <h4>Login to view photos and share with your friends</h4>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Username</label>
+                    <input type="text" class="form-control" name="username" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password" id="exampleInputPassword1" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <p>Don't have an account <a href="{% url 'register' %}">Register</a></p>
+            </form>
+            {% else %}
+            <div>
+            <form method='post'>
+             {% csrf_token %}
+              <h1>Register</h1>
+                {% for field in form %}
+                 <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">{{field.label}}</label>
+                    {{field}}
+                 </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <p>Already have an account <a href="{% url 'login' %}">Login</a></p>
+            </form>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    </div>
+    </div>
+{% endblock main-content %}

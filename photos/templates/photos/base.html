@@ -1,0 +1,79 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="{% static 'app/css/bootstrap.css' %}">
+
+    <!--Owl Carousel CSS-->
+    <link rel="stylesheet" href="{% static 'app/css/owl.carousel.min.css' %}">
+
+    <!--FontAwesome CSS-->
+    <link rel="stylesheet" href="{% static 'app/css/all.min.css' %}">
+
+    <!--Custom CSS-->
+    <link rel="stylesheet" href="{% static 'app/css/style.css' %}">
+
+     <!--awesomefont-->
+    <link rel="stylesheet" href="{% static 'app/css/fontawesome.css' %}">
+        <style>
+        .image-thumbail {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .list-group-item a {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+    <title>Awesome image {% block title %} {% endblock title %} </title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light header__navbar">
+     <div class="container">
+       <a class="navbar-brand" href="{% url 'home' %}">Image</a>
+       <div class=" navbar navbar-right">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0" id ="navbarSupportedContentLG">
+          {% if request.user.is_authenticated %}
+           <li class="nav-item dropdown mx-2">
+              <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown">
+                {{request.user.username|capfirst}}
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="profileDropdown" id ="navbarSupportedContentLG">
+                <li><a class="dropdown-item" href="{% url 'gallery' %}">Profile</a></li>
+                <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+              </ul>
+            </li>
+          {% else %}
+           <li><a href="{% url 'login' %}" class="nav-link ">Login</a></li>
+            <li ><a href="{% url 'register' %}" class="nav-link ">Registration</a></li>
+          {% endif %}
+          </ul>
+       </div>
+     </div>
+    </nav>     
+    {% block banner_slider %} {% endblock banner_slider %}
+    {% block livesale %} {% endblock livesale %}
+    {% block main-content %} {% endblock main-content %}
+
+    <!-- Start Footer -->
+    <footer class="container-fluid bg-dark text-center p-2 mt-5">
+        <small class="">Copyright &copy; 2021 || Designed By GeekyShows || </small>
+        <img src="{% static 'app/images/payment.png' %}" alt="" srcset="" class="img-fluid" height="2px">
+    </footer> <!-- End Footer -->
+
+    <!-- Jquery -->
+    <script src="{% static 'app/js/bootstrap.js' %}"></script>
+    <script src="{% static 'app/js/jquery.js' %}"></script>
+    <script src="{% static 'app/js/popper.js' %}"></script>
+    <script src="{% static 'app/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'app/js/all.min.js' %}"></script>
+    <script src="{% static 'app/js/myscript.js' %}"></script>
+    <script src="{% static 'app/js/fontawesome.js' %}"></script>
+  </body>
+</html>

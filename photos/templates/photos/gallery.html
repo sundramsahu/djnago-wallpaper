@@ -1,0 +1,65 @@
+{% extends 'photos/base.html' %}
+{% load static %}
+{% block main-content %} 
+  <div class="container">
+   {% if request.user.is_authenticated %}
+     <div class= "container-fluid jumbotron jumbotron-fluid m-3">
+       <div class="container">
+           <h4 class="display-6">Upload new Picture</h4>
+         
+           <p class="lead">
+               <a class="btn btn-primary btn-md"  href="{% url 'add' %}" role="button">Jumbo action name</a>
+           </p>
+       </div>
+    </div>
+   {% endif %}
+  </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                {% if request.user.is_authenticated %}
+                <p>Hello {{request.user}}</p>
+                {% endif %}
+                <div class="card">
+                    <div class="card-header">
+                        Categories
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a href="{% url 'gallery' %}">All</a>
+                        </li>
+                        {% for category in categories %}
+                        <li class=" list-group-item">
+                            <a href="{% url 'gallery' %}?category={{category.name}}">
+                                {{category.name}}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+
+                    {% for photo in photos %}
+                    <div class="col-md-4">
+                        <div class="card my-2">
+                            <img class="image-thumbail" src="{{photo.image.url}}" alt="Card image cap">
+                            <div class="card-footer">
+                               <small class="text-dark" > {{photo.description}}</small><br>
+                                <small class="text-secondary"> {{photo.upload_time | timesince}} ago {{photo.imgviiews}} Views </small>
+                            </div>
+                         <a href="{% url 'photo' photo.id %}" class="btn btn-outline-dark btn-sm m-1">View</a>
+                         <a href="{% url 'update' photo.id %}" class="btn btn-outline-danger btn-sm m-1">Delete</a>
+
+                        </div>
+                    </div>
+                    {% empty %}
+                    <h3>No photos...</h3>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock main-content %}

@@ -1,0 +1,72 @@
+{% extends 'photos/base.html' %}
+{% load static %}
+{% block main-content %} 
+     <div class="container-fluid tm-container-content tm-mt-5 pt-5">
+        <div class="row mb-4">
+            <h2 class="col-12 tm-text-primary">{{photo.description | capfirst}}</h2>
+        </div>
+        <div class="row tm-mb-90">            
+            <div class="col-xl-8 col-lg-7 col-md-6 col-sm-12">
+                 <img style="max-width: 100%; max-height: 100%;"  class="img-fluid" src="{{photo.image.url}}">
+            </div>
+            <div class="col-xl-4 col-lg-5 col-md-6 col-sm-12">
+                <div class="tm-bg-gray tm-video-details">  
+                    <div class="text-center mb-5">
+                        <a href="{{photo.image.url}}"download class="btn btn-primary tm-btn-big" >Download</a>
+                    </div>                    
+                    <div class="mb-4 d-flex flex-wrap">
+                        <div class="mr-4 mb-2">
+                            <span class="tm-text-gray-dark">Dimension: </span><span class="tm-text-primary">1920x1080</span>
+                        </div>
+                        <div class="mr-4 mb-2">
+                            <span class="tm-text-gray-dark">Format: </span><span class="tm-text-primary">JPG</span>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <h3 class="tm-text-gray-dark mb-3">License</h3>
+                        <p>Free for both personal and commercial use. No need to pay anything. No need to make any attribution.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row mt-5 mb-4">
+            <h2 class="col-12 tm-text-primary">
+                Related Photos
+            </h2>
+        </div>
+        <div class="container col-md-12">
+                <div class="row">
+                {% for photo in photos %}
+                    <div class="col-md-3">
+                        <div class="card my-3">
+                            <img class="image-thumbail"  src="{{photo.image.url}}" alt="Card image cap">
+                            <div class="card-footer">
+                               <small class="text-dark" > {{photo.description | capfirst}}</small><br>
+                              <!-- <small class="text-secondary"> {{photo.upload_time | timesince}} ago {{photo.imgviiews}} Views </small>--> 
+                              <div class=" d-flex justify-content-between">
+                                <small class="text-secondary"> {{photo.upload_time | date}} </small>
+                                <small class="text-secondary">{{photo.imgviiews}} Views</small>
+                              </div>
+                            </div>
+                            <a href="{% url 'photo' photo.id %}" class="btn btn-outline-dark btn-sm m-1">View</a>
+                        </div>
+                    </div>
+                {% empty %}
+                    <h3>No photos...</h3>
+                {% endfor %}
+                </div>
+        </div>
+
+
+    
+    <script src="js/plugins.js"></script>
+    <script>
+        $(window).on("load", function() {
+            $('body').addClass('loaded');
+        });
+    </script>
+</body>
+</html>
+
+{% endblock main-content %}
