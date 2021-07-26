@@ -8,7 +8,7 @@
 }
 
 .wrapper{
-  margin: 100px auto;
+  margin: 10px 100px;
   max-width: 1100px;
 }
 .wrapper div{
@@ -84,6 +84,7 @@ div a{
 
 .carousel-inner {
 	width: 100%;
+  
 	display: inline-block;
 	position: relative;
 }

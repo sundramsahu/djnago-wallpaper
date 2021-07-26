@@ -62,10 +62,31 @@
     {% block main-content %} {% endblock main-content %}
 
     <!-- Start Footer -->
-    <footer class="container-fluid bg-dark text-center p-2 mt-5">
-        <small class="">Copyright &copy; 2021 || Designed By GeekyShows || </small>
-        <img src="{% static 'app/images/payment.png' %}" alt="" srcset="" class="img-fluid" height="2px">
-    </footer> <!-- End Footer -->
+    <!-- Footer -->
+<footer class="text-center text-lg-start bg-light text-muted">
+  <!-- Section: Social media -->
+  <section class="d-flex justify-content-center justify-content-lg-between p-3 border-bottom" style="background-color: rgba(0, 0, 0, 0.05);">
+    <div class="me-5 d-none d-lg-block" >
+      <span>Get connected with us on social networks:</span>
+    </div>
+    <div>
+      <a href="https://www.facebook.com/S.kingkong/" class="me-4 text-reset"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://twitter.com/Sundramsahu" class="me-4 text-reset"><i class="fab fa-twitter"></i></a>
+      <a href="https://www.instagram.com/yoyo_sundram/" class="me-4 text-reset"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.linkedin.com/in/sundram-sahu-b5b232217/" class="me-4 text-reset"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/sundramsahu" class="me-4 text-reset"><i class="fab fa-github"></i></a>
+    </div>
+    <!-- Right -->
+  </section>
+
+  <!-- Copyright -->
+  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.10);">
+    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This image Website  by sundram sahu
+
+  </div>
+  <!-- Copyright -->
+</footer>
+<!-- Footer -->
 
     <!-- Jquery -->
     <script src="{% static 'app/js/bootstrap.js' %}"></script>

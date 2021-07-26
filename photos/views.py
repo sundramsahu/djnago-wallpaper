@@ -1,21 +1,33 @@
+from django.core import paginator
 from django.shortcuts import render, redirect
-from .models import Category, Photo
+from .models import Category, Photo,Banner
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm
 import random
-
+from django.core.paginator import EmptyPage, PageNotAnInteger , Paginator
 # Create your views here.
 
 def home(request):
     category = request.GET.get('category')
+    banner = list(Banner.objects.order_by('-pk').all())
+    banner =  random.sample(banner, 4)
+    
 
     if category == None:
         photos = Photo.objects.order_by('-pk').all()
+        paginator = Paginator(photos,12)
+        page = request.GET.get('page')
+        page_photos = paginator.get_page(page)
+        photos_count = photos.count()
     else:
         photos = Photo.objects.filter(category__name=category)
+        paginator = Paginator(photos,12)
+        page = request.GET.get('page')
+        page_photos = paginator.get_page(page)
+        photos_count = photos.count()
     categories = Category.objects.all()
-    context = {'categories': categories, 'photos': photos}
+    context = {'categories': categories, 'photos': page_photos,'pic_count':photos_count,"banner":banner}
     return render(request, 'photos/home.html', context)
 
 def loginUser(request):
@@ -60,12 +72,13 @@ def gallery(request):
     category = request.GET.get('category')
     if category == None:
         photos = Photo.objects.filter(user=user).order_by('-pk')
+        photos_count = photos.count()
     else:
         photos = Photo.objects.filter(
             category__name=category, user=user).order_by('-pk')
 
     categories = Category.objects.all()
-    context = {'categories': categories, 'photos': photos}
+    context = {'categories': categories, 'photos': photos,"pic_count":photos_count}
     return render(request, 'photos/gallery.html', context)
 
 

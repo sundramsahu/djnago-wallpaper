@@ -8,7 +8,7 @@
            <h4 class="display-6">Upload new Picture</h4>
          
            <p class="lead">
-               <a class="btn btn-primary btn-md"  href="{% url 'add' %}" role="button">Jumbo action name</a>
+               <a class="btn btn-primary btn-md"  href="{% url 'add' %}" role="button">Add Image</a>
            </p>
        </div>
     </div>
@@ -41,6 +41,9 @@
             </div>
             <div class="col-md-9">
                 <div class="row">
+                   <div class="my-3">
+                      <span class="text-muted">Total photos {{pic_count}} </span>
+                    </div>
 
                     {% for photo in photos %}
                     <div class="col-md-4">
