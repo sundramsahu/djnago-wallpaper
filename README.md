@@ -1,5 +1,6 @@
 # photo-album-app
 A photo album website with Django 
+responsive
 simple user model 
 paginator use 
 random image 
